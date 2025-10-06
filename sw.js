@@ -1,12 +1,16 @@
 //Plantilla de service worker 
 
 //1. nombre y archivos a cachear 
-const CACHE_NAME = "Nombre_del_cache";
+const CACHE_NAME = "mi-pwa-v1";
+const BASE_PATH = "./pwa-ejemplo1/";
 const urlsToCache = [
-    "indexedDB.html",
-    "style.css",
-    "app.js",
-    "offline.html"
+    `${BASE_PATH}index.html`,
+    `${BASE_PATH}manifest.json`,
+    `${BASE_PATH}offline.html,`
+    `${BASE_PATH}icon/icon-96x96.png`,
+    `${BASE_PATH}icon/icon-180x180.png`,
+    `${BASE_PATH}icon/icon-192x192.png`,
+    `${BASE_PATH}icon/icon-512x512.png`,
 ] ;
 
 //2. INSTALL -> El evento que se ejecuta al instalar el SW
