@@ -9,22 +9,22 @@
     "orientation": "portrait",
     "iconos": [
         {
-            "src": "icon/icon-96x96.png",
+            "src": "./pwa-ejemplo1/icons/icon-96x96.png",
             "sizes": "96x96.png",
             "type": "image/png"
         },
         {
-            "src": "icon/icon-180x180.png",
+            "src": "./pwa-ejemplo1/icons/icon-180x180.png",
             "sizes": "180x180.png",
             "type": "image/png"
         },
         {
-            "src": "icon/icon-192x192.png",
+            "src": "./pwa-ejemplo1/icons/icon-192x192.png",
             "sizes": "192x192.png",
             "type": "image/png"
         },
         {
-            "src": "icon/icon-512x512.png",
+            "src": "./pwa-ejemplo1/icons/icon-512x512.png",
             "sizes": "512x512.png",
             "type": "image/png"
         }

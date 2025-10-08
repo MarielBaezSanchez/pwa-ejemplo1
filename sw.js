@@ -7,10 +7,10 @@ const urlsToCache = [
     `${BASE_PATH}index.html`,
     `${BASE_PATH}manifest.json`,
     `${BASE_PATH}offline.html,`
-    `${BASE_PATH}icon/icon-96x96.png`,
-    `${BASE_PATH}icon/icon-180x180.png`,
-    `${BASE_PATH}icon/icon-192x192.png`,
-    `${BASE_PATH}icon/icon-512x512.png`,
+    `${BASE_PATH}icons/icon-96x96.png`,
+    `${BASE_PATH}icons/icon-180x180.png`,
+    `${BASE_PATH}icons/icon-192x192.png`,
+    `${BASE_PATH}icons/icon-512x512.png`,
 ] ;
 
 //2. INSTALL -> El evento que se ejecuta al instalar el SW
@@ -42,7 +42,7 @@ self.addEventListener("activate", event => {
     self.addEventListener("fetch", event => {
         event.respondWith(
             caches.match(event.request).then( response => {
-                return response || fetch(event.request).catch(() => caches.match("offline.html"));
+                return response || fetch(event.request).catch(() => caches.match(`${BASE_PATH}offline.html`));
             })
         );
     });
