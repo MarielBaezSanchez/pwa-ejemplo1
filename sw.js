@@ -1,61 +1,55 @@
-// Plantilla de service worker 
+// Nombre del caché
+const CACHE_NAME = "mi-pwa-v13";
 
-//1. Nombre y archivos a cachear 
-const CACHE_NAME = "mi-pwa-v12";
-const BASE_PATH = "pwa-ejemplo1/";
+// Archivos a cachear
 const urlsToCache = [
-    `${BASE_PATH}index.html`,
-    `${BASE_PATH}manifest.json`,
-    `${BASE_PATH}offline.html`,
-    `${BASE_PATH}icons/icon-96x96.png`,
-    `${BASE_PATH}icons/icon-180x180.png`,
-    `${BASE_PATH}icons/icon-192x192.png`,
-    `${BASE_PATH}icons/icon-512x512.png`,
-] ;
+    "index.html",
+    "manifest.json",
+    "offline.html",
+    "icons/icon-96x96.png",
+    "icons/icon-180x180.png",
+    "icons/icon-192x192.png",
+    "icons/icon-512x512.png"
+];
 
-//2. INSTALL -> El evento que se ejecuta al instalar el SW
-// Se dispara la primera vez que se registra el service worker
+// 1️⃣ INSTALACIÓN - Cachea los recursos
 self.addEventListener("install", event => {
+    console.log("Service Worker instalado");
     event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => { // <-- Se corrigió la sintaxis
-            return cache.addAll(urlsToCache);
-        })
+        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
     );
 });
 
-//3. ACTIVATE -> El evento que se ejecuta al activarse y debe limpiar caches viejas
-// Se dispara cuando el service worker toma el control de la aplicación
+// 2️⃣ ACTIVACIÓN - Limpia versiones anteriores del caché
 self.addEventListener("activate", event => {
+    console.log("Service Worker activado");
     event.waitUntil(
-        caches.keys().then( keys  => 
+        caches.keys().then(keys =>
             Promise.all(
-                keys.filter( key => key !== CACHE_NAME )
-                .map( key => caches.delete(key) )
+                keys
+                    .filter(key => key !== CACHE_NAME)
+                    .map(key => caches.delete(key))
             )
         )
     );
 });
-    
 
-//4. FETCH -> Interpreta las peticiones de la PW.
-// Interpreta cada peticion de cada pagina de la PWA
-// busca primero el cache y si el recurso no esta se va a red, si falla todo nos muetra offline.html
+// 3️⃣ FETCH - Sirve los recursos desde caché o red
 self.addEventListener("fetch", event => {
     event.respondWith(
-        caches.match(event.request).then( response => {
-            return response || fetch(event.request).catch(() => caches.match(`${BASE_PATH}offline.html`));
+        caches.match(event.request).then(response => {
+            if (response) {
+                // Si el recurso está cacheado, lo devuelve
+                return response;
+            }
+
+            // Si no, intenta obtenerlo de la red
+            return fetch(event.request).catch(() => {
+                // Si falla (sin internet) y es navegación, muestra offline.html
+                if (event.request.mode === "navigate") {
+                    return caches.match("offline.html");
+                }
+            });
         })
     );
 });
-
-//5. PUSH -> Manejo de notificaciones En segundo plano (opcional)
-self.addEventListener("push", event => {
-    const data = event.data ? event.data.text() : "Notificación sin datos";
-    event.waitUntil(
-        self.registration.showNotification("Mi PWA", { body: data})
-    );
-});
-
-// Opcional:
-// SYNC -> Sincronización en segundo plano (opcional)
-// Manejo de eventos de APIS que el navegador soporte
