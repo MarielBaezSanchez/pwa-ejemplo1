@@ -25,14 +25,15 @@
     </ul>
 
     <script>
-    if("serviceWorker" in navigator){
-        // CAMBIO: Forzamos el 'scope' para asegurar que el SW controle toda la carpeta del proyecto
-        navigator.serviceWorker.register("/pwa-ejemplo1/sw.js", {
-            scope: "/pwa-ejemplo1/" 
-        })
-        .then(reg => console.log("Service Worker registrado con alcance correcto"))
-        .catch(err => console.log("Error al registrar el Service Worker", err));
-    }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('./sw.js')
+            .then(() => console.log('✅ Service Worker registrado correctamente'))
+            .catch(err => console.log('❌ Error al registrar el SW:', err));
+    });
+}
 </script>
+
 </body>
 </html>
