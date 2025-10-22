@@ -6,7 +6,7 @@ const BASE_PATH = "pwa-ejemplo1/";
 const urlsToCache = [
     `${BASE_PATH}index.html`,
     `${BASE_PATH}manifest.json`,
-    `${BASE_PATH}offline.html`, // <-- Coma eliminada
+    `${BASE_PATH}offline.html`,
     `${BASE_PATH}icons/icon-96x96.png`,
     `${BASE_PATH}icons/icon-180x180.png`,
     `${BASE_PATH}icons/icon-192x192.png`,
