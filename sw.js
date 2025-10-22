@@ -4,13 +4,13 @@
 const CACHE_NAME = "mi-pwa-v1";
 const BASE_PATH = "pwa-ejemplo1/";
 const urlsToCache = [
-    `${BASE_PATH}pwa-ejemplo1/index.html`,
-    `${BASE_PATH}pwa-ejemplo1/manifest.json`,
-    `${BASE_PATH}pwa-ejemplo1/offline.html`,
-    `${BASE_PATH}pwa-ejemplo1/icons/icon-96x96.png`,
-    `${BASE_PATH}pwa-ejemplo1/icons/icon-180x180.png`,
-    `${BASE_PATH}pwa-ejemplo1/icons/icon-192x192.png`,
-    `${BASE_PATH}pwa-ejemplo1/icons/icon-512x512.png`,
+    `${BASE_PATH}index.html`,
+    `${BASE_PATH}manifest.json`,
+    `${BASE_PATH}offline.html`,
+    `${BASE_PATH}icons/icon-96x96.png`,
+    `${BASE_PATH}icons/icon-180x180.png`,
+    `${BASE_PATH}icons/icon-192x192.png`,
+    `${BASE_PATH}icons/icon-512x512.png`,
 ] ;
 
 //2. INSTALL -> El evento que se ejecuta al instalar el SW
