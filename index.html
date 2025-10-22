@@ -25,12 +25,14 @@
     </ul>
 
     <script>
-        if("serviceWorker" in navigator){
-            // Usar ruta absoluta para el service worker
-            navigator.serviceWorker.register("/pwa-ejemplo1/sw.js")
-            .then(reg => console.log("Service Worker registrado"))
-            .catch(err => console.log("Error al registrar el Service Worker", err));
-        }
-    </script>
+    if("serviceWorker" in navigator){
+        // CAMBIO: Forzamos el 'scope' para asegurar que el SW controle toda la carpeta del proyecto
+        navigator.serviceWorker.register("/pwa-ejemplo1/sw.js", {
+            scope: "/pwa-ejemplo1/" 
+        })
+        .then(reg => console.log("Service Worker registrado con alcance correcto"))
+        .catch(err => console.log("Error al registrar el Service Worker", err));
+    }
+</script>
 </body>
 </html>

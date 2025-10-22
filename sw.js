@@ -1,7 +1,7 @@
 // Plantilla de service worker 
 
 //1. Nombre y archivos a cachear 
-const CACHE_NAME = "mi-pwa-v1";
+const CACHE_NAME = "mi-pwa-v12";
 const BASE_PATH = "pwa-ejemplo1/";
 const urlsToCache = [
     `${BASE_PATH}index.html`,
